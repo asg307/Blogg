@@ -1,13 +1,14 @@
 import { Link, useNavigate } from "react-router-dom";
 import { useContext, useEffect } from "react";
 import { UserContext } from "./UserContext";
+import { API_URL } from "./utils/apiConfig.js";
 
 export default function Header() {
   const { setUserInfo, userInfo } = useContext(UserContext);
   const navigate = useNavigate();
 
   useEffect(() => {
-    fetch('http://localhost:4000/profile', {
+    fetch(API_URL + '/profile', {
       credentials: 'include',
     }).then(response => {
       response.json().then(userInfo => {
@@ -17,7 +18,7 @@ export default function Header() {
   }, [setUserInfo]);
 
   function logout() {
-    fetch('http://localhost:4000/logout', {
+    fetch(API_URL+'/logout', {
       credentials: 'include',
       method: 'POST',
     }).then(() => {
